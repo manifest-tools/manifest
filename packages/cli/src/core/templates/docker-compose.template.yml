@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+
+  {{#services}}
+  ##
+  ##  {{service_name}}
+  ##
+  {{service_name}}:
+    image: {{image_name}}
+    container_name: {{network.hostname}}
+    ports:
+      - "{{ports.rest.host}}:{{ports.rest.container}}"
+      - "{{ports.grpc.host}}:{{ports.grpc.container}}"
+    environment:
+      - MANIFEST_CONFIG={{manifest_config}}
+  {{/services}}

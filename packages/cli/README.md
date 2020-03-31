@@ -1,0 +1,11 @@
+
+
+
+
+
+## Commands
+
+### build
+```
+$ manifest build
+```

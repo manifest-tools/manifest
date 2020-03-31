@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "grpc": "node ./grpc.js",
+    "rest": "node ./rest.js"
+  }
+}
