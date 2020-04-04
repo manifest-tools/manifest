@@ -1,9 +1,8 @@
-
 import * as yargs from 'yargs'
 
-import * as core from './core'
-import build from './commands/build'
-import deploy from './commands/deploy'
+import * as core from '~manifest/core'
+import build from '~manifest/commands/build'
+import deploy from '~manifest/commands/deploy'
 
 
 const test = args => {

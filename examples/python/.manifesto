@@ -1,0 +1,10 @@
+
+language: python
+
+project:
+  root: ./platform
+  services: ./platform/services
+  core: ./platform/core
+
+build:
+  directory: ./.manifest

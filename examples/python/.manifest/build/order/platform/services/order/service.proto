@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+
+service OrderService {
+   rpc find_order(Identifier) returns (Order) {}
+   rpc list_orders_for_user(Identifier) returns (OrderList) {}
+}
+
+
+message Identifier {
+  string id = 1;
+}
+
+message Order {
+  string id = 1;
+  repeated OrderItem items = 2;
+}
+
+message OrderItem {
+  string id = 1;
+  string name = 2;
+  int32 price = 3;
+}
+
+message OrderList {
+  repeated Order orders = 1;
+}

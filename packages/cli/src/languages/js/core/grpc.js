@@ -1,5 +1,5 @@
-import { run } from './cmd'
-import { findReplaceInFile } from './fs'
+import { run } from '~manifest/core/cmd'
+import { findReplaceInFile } from '~manifest/core/fs'
 
 
 

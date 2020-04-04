@@ -1,7 +1,6 @@
 
 export * as fs from './fs'
 export * as cmd from './cmd'
-export * as grpc from './grpc'
 export * as templates from './templates'
 export * as str from './str'
 export * as docker from './docker'

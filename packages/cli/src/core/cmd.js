@@ -2,9 +2,10 @@ import { exec } from 'child_process'
 
 
 
-export const run = async cmd => {
+export const run = async (cmd, cwd) => {
+  const executor = cb => cwd ? exec(cmd, { cwd }, cb) : exec(cmd, cb)
   return await new Promise((resolve, reject) => {
-    const child = exec(cmd, (err, stdout, stderr) => {
+    const child = executor((err, stdout, stderr) => {
       if (err) {
         reject({
           err,

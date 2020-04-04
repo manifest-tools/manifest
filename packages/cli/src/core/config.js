@@ -17,6 +17,8 @@ export const loadManifesto = async argv => {
   }
 
   const file = await fse.readFile(path, 'utf8')
-  argv.manifesto = YAML.parse(file)
+  const config = YAML.parse(file)
+
+  argv.manifesto = config
 
 }
