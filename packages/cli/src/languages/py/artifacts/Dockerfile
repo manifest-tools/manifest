@@ -4,11 +4,11 @@ RUN pip install grpcio-tools starlette uvicorn
 RUN apt-get update && apt-get install -y supervisor
 RUN mkdir -p /var/log/supervisor
 
-ENV PYTHONPATH="$PYTHONPATH:/usr/src/grpc/service"
+ENV PYTHONPATH "/usr/src/grpc/service"
 
 RUN printf "[program:grpc] \n\
 directory=/usr/src/grpc/service \n\
-command=python ./grpc_server.py\n\
+command=python ./start_grpc_server.py\n\
 autostart=true\n\
 autorestart=true\n\
 redirect_stderr=true\n\
@@ -17,7 +17,7 @@ stdout_logfile_maxbytes=0\n\
 \n\
 [program:rest] \n\
 directory=/usr/src/grpc/service \n\
-command=python ./rest_server.py\n\
+command=python ./start_rest_server.py\n\
 autostart=true\n\
 autorestart=true\n\
 redirect_stderr=true\n\

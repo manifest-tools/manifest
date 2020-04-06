@@ -2,9 +2,10 @@
 language: python
 
 project:
-  root: ./platform
-  services: ./platform/services
-  core: ./platform/core
+  name: libra
+  root: ./libra
+  services: ./libra/services
+  core: ./libra/core
 
 build:
   directory: ./.manifest

@@ -7,6 +7,8 @@ import * as core from './../core'
 const START_PORT = 9000
 const END_PORT = 9050
 
+const print = x => console.log(x)
+
 const ports = (() => {
 
   function * portGen() {
@@ -30,14 +32,16 @@ const deploy = async ({
   manifesto
 }) => {
 
-  console.log('deploying...')
+  const { project: { name: projectName } } = manifesto
 
-  const serviceNames = await core.fs.listDirectories('./.manifest/build')
+  print(`deploying ${projectName}...`)
+
+  const serviceNames = await core.fs.listDirectories('./.manifest')
 
   const services = serviceNames.map(name => ({
     serviceName: name,
     serviceClassName: core.str.toPascalCase(`${name}-service`),
-    imageName: `manifest-service-${name}`,
+    imageName: `manifest-service-${projectName}-${name}`,
     ports: {
       rest: {
         container: '5000',
@@ -49,7 +53,7 @@ const deploy = async ({
       }
     },
     network: {
-      hostname: `manifest-service-${name}`,
+      hostname: `manifest-service-${projectName}-${name}`,
       port: '50051'
     }
   }))

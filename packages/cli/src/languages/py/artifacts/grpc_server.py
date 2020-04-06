@@ -1,12 +1,14 @@
+import importlib
 from concurrent import futures
 from functools import wraps
 
 import grpc
 
-import service_pb2
-import service_pb2_grpc
-from .service_meta import SERVICE_FN_META_MAP, SERVICE_NAME
-import .service
+from .service_meta import SERVICE_FN_META_MAP, SERVICE_NAME, SERVICE_CLASS
+from . import service
+
+service_pb2 = importlib.import_module(f'.{SERVICE_NAME}_pb2', package=__package__)
+service_pb2_grpc = importlib.import_module(f'.{SERVICE_NAME}_pb2_grpc', package=__package__)
 
 
 def handle_grpc_model(fn):
@@ -15,7 +17,7 @@ def handle_grpc_model(fn):
     def wrapper(request, context):
         fn_meta = SERVICE_FN_META_MAP[fn.__name__]
         return_type_name = fn_meta.get('returns')
-        ReturnTypeClass = getattr(books_pb2, return_type_name)
+        ReturnTypeClass = getattr(service_pb2, return_type_name)
 
         # Get all fields from request model and take the
         # values (t[1]) from the tuples
@@ -40,7 +42,7 @@ def serve():
             response_serializer=getattr(service_pb2, fn_return).SerializeToString)
 
     rpc_method_handlers = { fn: unary_for(fn) for fn in SERVICE_FN_META_MAP.keys() }
-    generic_handler = grpc.method_handlers_generic_handler(SERVICE_NAME, rpc_method_handlers)
+    generic_handler = grpc.method_handlers_generic_handler(SERVICE_CLASS, rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
     server.add_insecure_port('[::]:50051')
     server.start()
