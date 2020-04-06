@@ -1,7 +1,7 @@
 import * as fse from 'fs-extra'
 import * as _ from 'lodash'
 
-import * as core from './../core'
+import * as core from '~manifest/core'
 
 
 const START_PORT = 9000
