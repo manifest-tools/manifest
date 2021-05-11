@@ -15,7 +15,7 @@
     "esm": "^3.2.25",
     "fs-extra": "^9.0.0",
     "link-module-alias": "^1.2.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "module-alias": "^2.2.2",
     "mustache": "^4.0.1",
     "postinstall-postinstall": "^2.1.0",
